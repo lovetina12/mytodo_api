@@ -20,7 +20,7 @@ app.post('/ todo', async(req, res)=>{
     try{
         const saveTodo = await todo.save();
             res.json({
-            dataTodo,
+            data: saveTodo,
             message:"todo successfully created"
         });
     }catch(err){
@@ -71,14 +71,14 @@ app.delete('/todos/todoId', async(req, res)=>{
 
 app.patch('/todo/:todoId', async(req, res)=>{
     try{
-    const updateTodo = await todoModel.findOneAndUpdate({_id:req.params.todoid,},{$set:{
+    const updateTodo = await todoModel.findOneAndUpdate({_id:req.params.todoId,},{$set:{
         title: req.body,title,
-        status:req.body.status,
-        body:req.body.body
+        status: req.body.status,
+        body: req.body.body
     }});
     res.json({
-        data:updataTodo,
-        message:"Todo successfully delete"
+        data: updateTodo,
+        message:"Todo successfully updated"
     });
 }catch(err){
     res.json({

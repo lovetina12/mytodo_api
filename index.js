@@ -92,4 +92,4 @@ app.patch('/todo/:todoId', async(req, res)=>{
 mongoose.connect(process.env.DB_URL, 
 ()=>console.log('successfully connected'));
 
-app.listen(1020);
+app.listen(1020 || process.env.port);

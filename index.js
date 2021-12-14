@@ -69,13 +69,24 @@ app.delete('/todos/todoId', async(req, res)=>{
     }    
 });
 
-app.patch('/todo/:todoId',(req, res)=>{
-    todoModel.findOneAndUpdate({_id:req.params.todoid,},{$set:{
+app.patch('/todo/:todoId', async(req, res)=>{
+    try{
+    const updateTodo = await todoModel.findOneAndUpdate({_id:req.params.todoid,},{$set:{
         title: req.body,title,
         status:req.body.status,
         body:req.body.body
     }});
-})
+    res.json({
+        data:updataTodo,
+        message:"Todo successfully delete"
+    });
+}catch(err){
+    res.json({
+        message:err
+    });
+
+}
+});
 
 
 mongoose.connect(process.env.DB_URL, 
